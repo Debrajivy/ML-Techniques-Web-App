@@ -11,7 +11,9 @@ const THEME = {
   accent: "border-red-900",
 };
 
-const apiKey = ""; // API Key injected at runtime
+const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+
+ 
 
 // --- Helper Components ---
 
@@ -60,6 +62,8 @@ const Badge = ({ children, type = "neutral" }) => {
 
 // 1. Linear Regression Simulation
 const LinearRegressionSim = () => {
+
+  
   const [slope, setSlope] = useState(1);
   const [intercept, setIntercept] = useState(20);
   
@@ -772,6 +776,7 @@ const QuizMode = () => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [answerState, setAnswerState] = useState(null); 
+  
 
   const questions = [
     {
@@ -932,6 +937,14 @@ const AIStrategyConsultant = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+
+   useEffect(() => {
+    console.log("=== API KEY DEBUG ===");
+    console.log("apiKey variable:", apiKey);
+    console.log("process.env.NEXT_PUBLIC_GEMINI_API_KEY:", process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+    console.log("All env keys:", Object.keys(process.env).filter(key => key.includes('GEMINI')));
+    console.log("=== END DEBUG ===");
+  }, []);
   const analyzeScenario = async () => {
     if (!input.trim()) return;
     setLoading(true);
